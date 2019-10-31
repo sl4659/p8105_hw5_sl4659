@@ -10,3 +10,46 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Problem 1
+```{r Problem1}
+library(tidyverse)
+library(rvest)
+
+set.seed(20191029)
+# load the iris dataset from the tidyverse package 
+# introduce some missing values in each column
+iris_with_missing = iris %>% 
+  map_df(~replace(.x, sample(1:150, 20), NA)) %>%
+  mutate(Species = as.character(Species))
+# function that takes a vector as an argument; replaces missing values using the rules instructed
+mis_replace = function(x) {
+  output = vector(length = length(x))
+  for (i in 1:length(x)) {
+    if (is.numeric(x[i])) {
+      mean = mean(x[!is.na(x)])
+      if (is.na(x[i])) {
+        output[i] = mean
+      } else {
+        output[i] = x[i]
+      }
+    } else if (is.character(x[i])) {
+      if (is.na(x[i])) {
+        output[i] = "virginica"
+      } else {
+        output[i] = x[i]
+      }
+    }
+  }
+  output
+}
+# apply mis_replace to the columns of iris_with_missing using a map statement
+iris_fixed = map(iris_with_missing, mis_replace) %>%
+  # convert list to data frame
+  as.data.frame()
+```
+
+## Problem 2
+```{r Problem2}
+
+```
+
+
