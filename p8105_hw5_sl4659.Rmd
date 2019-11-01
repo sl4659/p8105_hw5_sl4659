@@ -61,13 +61,12 @@ study_df = map_df(.x = file_vec, ~ read_csv(file = .x), .id = "file") %>%
     subject_id = as.integer(substring(file, 5, 6))
   )
 # tidy weekly observations
-study_tidy_df = 
-  pivot_longer(
-    study_df, 
-    week_1:week_8,
-    names_to = "week", 
-    names_prefix = "week_",
-    values_to = "value")
+study_tidy_df = pivot_longer(
+  study_df, 
+  week_1:week_8,
+  names_to = "week", 
+  names_prefix = "week_",
+  values_to = "value")
 study_tidy_df$week = as.integer(study_tidy_df$week)
 # multiple groups with one aesthetic
 ggplot(data = study_tidy_df, aes(x = week, y = value)) + 
@@ -82,7 +81,7 @@ ggplot(data = study_tidy_df, aes(x = week, y = value)) +
   )
 ```
 
-From the spaghetti plot, we can conlude that in general, the experiment group has greater values than the control group during the 8 week observation period.
+From the spaghetti plot, we can conlude that subjects in the experiment group generally experienced an increase in our measured variables of interest during the 8 week observation period, while the control group experienced no obvious changes in values.
 
 ## Problem 3
 
