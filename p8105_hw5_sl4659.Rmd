@@ -130,7 +130,8 @@ power_vec = map_dbl(.x = beta1_char, ~ power_count(df = beta1_df, size = .x), .i
 power_df = tibble(beta1 = names(power_vec), power = power_vec)
 power_df$beta1 = as.integer(power_df$beta1)
 ggplot(power_df, aes(x = beta1, y = power)) + 
-  geom_point() +
+  geom_point() + 
+  geom_text(aes(label = round(power, digits = 3)), vjust = rep(-0.5, each = 6)) +
   # title, label and caption
   labs(
     title = "Proportion of times the null was rejected vs True value of beta1",
@@ -154,6 +155,7 @@ mean_df = tibble(beta1 = names(mean_vec), mean = mean_vec)
 mean_df$beta1 = as.integer(mean_df$beta1)
 ggplot(mean_df, aes(x = beta1, y = mean)) + 
   geom_point() +
+  geom_text(aes(label = round(mean, digits = 2)), vjust = rep(-0.5, each = 6)) +
   # title, label and caption
   labs(
     title = "Average estimate of beta1_hat vs True value of beta1",
@@ -172,6 +174,7 @@ null_df = tibble(beta1 = names(null_vec), mean = null_vec)
 null_df$beta1 = as.integer(mean_df$beta1)
 ggplot(null_df, aes(x = beta1, y = mean)) + 
   geom_point() +
+  geom_text(aes(label = round(mean, digits = 2)), vjust = rep(-0.5, each = 6)) +
   # title, label and caption
   labs(
     title = "Average estimate of beta1_hat (rejected H0) vs True value of beta1",
