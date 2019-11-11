@@ -139,7 +139,7 @@ ggplot(power_df, aes(x = beta1, y = power)) +
   )
 ```
 
-From the plot, we can conclude that for any given population standard deviation, the greater the difference between the means of the null and alternative distributions (true value of beta1/effect size), the greater the power.
+Power is the probability of rejecting the null hypothesis when in fact it is false. In the case of beta1 = 0, proportion of times the null was rejected for has no meaning since the null hypothesis is actually true. However, I still include beta1 = 0 in the plot for completeness. From the plot, we can conclude that for any given population standard deviation, the greater the difference between the means of the null and alternative distributions (true value of beta1/effect size), the greater the power.
 
 ```{r Problem3Part2}
 # write a function to compute the average estimate of beta1_hat
